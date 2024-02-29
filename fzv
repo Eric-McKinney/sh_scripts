@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# fzv (fuzzy vim)
+# Author: Eric McKinney
+# Description: Select a directory from a list which you can query via fzf to open in vim.
+
+if [[ $# -ge 1 ]]; then
+    echo $0: "$# arguments received, 0 expected"
+    exit 1
+fi
+
+selected=$(find ~/ ~/216TAstuff ~/330 ~/projects ~/bin/sh_scripts -mindepth 1 -maxdepth 1 -type d | fzf)
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+vim $selected
+
