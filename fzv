@@ -17,3 +17,6 @@ fi
 
 vim $selected
 
+#!/usr/bin/env bash
+cd $selected || exit 1
+exec bash
