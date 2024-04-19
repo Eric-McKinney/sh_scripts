@@ -3,6 +3,7 @@
 # fzv (fuzzy vim)
 # Author: Eric McKinney
 # Description: Select a directory from a list which you can query via fzf to open in vim.
+# TODO: add --help, -h flags (maybe other flags too? e.g. -d, --depth)
 
 if [[ $# -ge 1 ]]; then
     echo $0: "$# arguments received, 0 expected"
