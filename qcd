@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# qcd (quick cd)
+# Author: Eric McKinney
+# Description: Selects a directory via fzf and cd's to its newest subdirectory in a new bash shell
+
+if [[ $# -ge 1 ]]; then
+    echo $0: "$# arguments received, 0 expected"
+    exit 1
+fi
+
+selected=$(find ~/ . ~/216TAstuff ~/330 ~/projects ~/bin/sh_scripts -mindepth 1 -maxdepth 1 -type d 2> /dev/null | fzf)
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+newest_subdir=$(ls -td -- "$selected" | head -n 1)
+
+#!/usr/bin/env bash
+cd $newest_subdir || exit 1
+exec bash
