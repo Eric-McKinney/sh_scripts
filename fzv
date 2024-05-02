@@ -2,7 +2,7 @@
 
 # fzv (fuzzy vim)
 # Author: Eric McKinney
-# Description: Select a directory from a list which you can query via fzf to open in vim.
+# Description: Selects a directory via fzf to open in vim. A new bash shell is opened in this directory.
 # TODO: add --help, -h flags (maybe other flags too? e.g. -d, --depth)
 
 if [[ $# -ge 1 ]]; then
