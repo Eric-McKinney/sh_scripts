@@ -2,7 +2,7 @@
 
 # qcd (quick cd)
 # Author: Eric McKinney
-# Description: Selects a directory via fzf and cd's to its newest subdirectory in a new bash shell
+# Description: Selects a directory via fzf and cd's to it in a new bash shell.
 
 if [[ $# -ge 1 ]]; then
     echo $0: "$# arguments received, 0 expected"
@@ -15,8 +15,6 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-newest_subdir=$(ls -td -- "$selected" | head -n 1)
-
 #!/usr/bin/env bash
-cd $newest_subdir || exit 1
+cd $selected || exit 1
 exec bash
