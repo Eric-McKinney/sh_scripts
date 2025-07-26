@@ -5,21 +5,21 @@ print_help() {
 	usage: ${0##*/} [OPTION]... [--] FILE...
 
 	DESCRIPTION
-		Normalize the names of all FILEs given by replacing spaces with underscores and
-		breaking up camel case with underscores.
+	    Normalize the names of all FILEs given by replacing spaces with underscores and
+	    breaking up camel case with underscores.
 
-		FILE
-			Path to a file or directory (relative or absolute)
+	    FILE
+	        Path to a file or directory (relative or absolute)
 
 	OPTIONS
-		--help
-			Print this message and exit.
+	    --help
+	        Print this message and exit.
 
-		--recursive, -r
-			Normalize the entire contents of any directories given (including subdirectories).
+	    --recursive, -r
+	        Normalize the entire contents of any directories given (including subdirectories).
 
-		--
-			End of options. Everything after is treated as a FILE
+	    --
+	        End of options. Everything after is treated as a FILE
 	HEREDOC
 }
 
@@ -30,7 +30,7 @@ while [[ "$1" =~ ^- ]]
 do
     curr_opt="$1"
     case "$curr_opt" in
-        --help) echo ; exit 0 ;;
+        --help) print_help; exit 0 ;;
         --recursive|-r) recursive="true" ;;
         --) shift; break ;;
         *) echo "error: unrecognized option \"$curr_opt\""; exit 1 ;;
