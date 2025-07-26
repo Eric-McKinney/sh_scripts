@@ -50,10 +50,11 @@ normalize() {
     local file
     for file in "$@"
     do
-        local path="${file%/*}"
-
         # handle directories passed with a trailing /
-        : "${file%%/}"
+        file="${file%/}"
+
+        local path="${file%/*}"
+        [[ "$path" == "$file" ]] && path=""
 
         # only operate on the file name part of the arg
         : "${file##*/}"
@@ -67,15 +68,15 @@ normalize() {
         : "${_//-_/_}"
 
         # change camelCase to camel_Snake_Case
-        : "$(echo "$_" | sed -r 's/([a-z])([A-Z][a-z])/\1_\2/g')"
+        local new_name="$(echo "$_" | sed -r 's/([a-z])([A-Z][a-z])/\1_\2/g')"
 
-        local new_name="$path/$_"
+        local full_new_name="${path:+"$path/"}$new_name"
 
-        if [[ "$file" != "$new_name" ]]
+        if [[ "$file" != "$full_new_name" ]]
         then
-            [[ -e "$new_name" ]] && { echo "error: $file normalizes to $new_name which already exists"; exit 1; }
+            [[ -e "$full_new_name" ]] && { echo "error: $file normalizes to $new_name which already exists"; exit 1; }
 
-            mv "$file" "$new_name" || { echo "error: mv \"$file\" \"$new_name\" failed"; exit 1; }
+            mv "$file" "$full_new_name" || { echo "error: mv \"$file\" \"$new_name\" failed"; exit 1; }
         fi
 
         [[ "$recursive" == "true" ]] && [[ -d "$new_name" ]] && normalize "$new_name"/*
