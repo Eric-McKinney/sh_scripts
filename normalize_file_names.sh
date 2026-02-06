@@ -59,6 +59,14 @@ normalize() {
         # only operate on the file name part of the arg
         : "${file##*/}"
 
+        # remove awkward characters like ', ", !, etc.
+        : "${_//\'/}"
+        : "${_//\"/}"
+        : "${_//\!/}"
+        : "${_//\:/}"
+        : "${_//\[/}"
+        : "${_//\]/}"
+
         # replace spaces with underscores
         : "${_//+([[:space:]])/_}"
 
