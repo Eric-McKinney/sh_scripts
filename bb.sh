@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+
 set -e
 set -u
+
+# run a command in the background and discard its stdout and stderr
 
 if test -t 1; then
   exec 1>/dev/null
