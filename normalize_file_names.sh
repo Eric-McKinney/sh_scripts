@@ -66,6 +66,11 @@ normalize() {
         : "${_//\:/}"
         : "${_//\[/}"
         : "${_//\]/}"
+        : "${_//\?/}"
+        : "${_//\*/}"
+
+        # replace "&" with "and"
+        : "${_//\&/and}"
 
         # replace spaces with underscores
         : "${_//+([[:space:]])/_}"
